@@ -1,0 +1,203 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    /* background: #1b1a1a; for full background image  */
+    color: whitesmoke;
+}
+body {
+    background: linear-gradient(135deg, #0f3d26, #1db954); /* Dark green gradient */
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.background-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(12px);
+    background-color: rgba(0, 0, 0, 0.6); /* optional: dark overlay */
+    z-index: -1; /* stay behind all content */
+}
+
+/* Container Styles */
+.container {
+    width: 80%;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px; 
+    background-position: center;
+}
+
+/* Heading Styles */
+h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: 		green;
+}
+
+/* Form Styles */
+form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+/* Input Styles */
+input {
+    width: 60%;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 1.2rem;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    outline: none;
+}
+
+/* Button Styles */
+button {
+    width: 10%;
+    height: 40px;
+    border: 1px solid green;
+    color: white;
+    background: green;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+#format{
+    width: 8vw;
+    background: green;
+    align-items: center;
+    height: 40px;
+    margin-left: 2vw;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    outline: none;
+}
+#format option{
+    background: green;
+    color: white;
+}
+button:hover {
+    background: darkgreen;
+    color: white;
+}
+
+
+
+
+
+/* song details */
+.song_content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#song-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#song-details img{
+    margin-top: 20px;
+    /* width: 256px;
+    height: 256px; */
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    border: 3px solid green;
+    
+    
+}
+
+#song-details p{
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+}
+
+#song-details #song_title{
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: green;
+}
+
+.song_content hr{
+    width: 256px;
+    border: 0.5px solid grey;
+    margin-top: 20px;
+}
+/*----------- Download content --------------*/
+.download_content{
+    max-width: 900px;
+    
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+   /* border: 1px solid red;*/
+}
+.download_content .left {
+    max-width: 700px;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    /*border: 1px solid green;*/
+    gap: 30px;
+}
+.text #download_song_cover_image{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+.left .text{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.left .text p{
+    font-size: 1rem;
+    padding-left: 10px;
+    color: white;
+    font-weight: 700;
+}
+.download_content .right{
+   
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.download_content .right button {
+    width: 100%;
+    height: 40px;
+
+   
+  
+}
+
+

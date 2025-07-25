@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Spotify Song Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .about-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-container h1 {
+            font-size: 2.5rem;
+            color: #1DB954;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .about-container p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #f1f1f1;
+            margin-bottom: 15px;
+        }
+
+        .about-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-container ul li::before {
+            content: "🎵 ";
+        }
+
+        .about-container ul li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #f1f1f1;
+        }
+
+        .about-container a {
+            color: #1DB954;
+            text-decoration: underline;
+        }
+        #start{
+            width: 100%;
+        }
+         #start button {
+            width: 400px;
+            margin-left: 25%;
+            /* background: #1DB954; */
+            font-size: 15px;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="about-container">
+        <h1>About Spotify Song Downloader</h1>
+        <p>Welcome to <strong>Spotify Song Downloader</strong> – your one-stop solution for effortlessly downloading
+            your favorite songs and playlists directly from Spotify.</p>
+
+        <p>This app offers a smooth and intuitive experience, allowing you to download tracks in various formats
+            including <strong>MP3</strong>, <strong>FLAC</strong>, <strong>M4A</strong>, and <strong>OPUS</strong>.</p>
+
+        <h2>Features</h2>
+        <ul>
+            <li>Download individual songs or full playlists</li>
+            <li>Select from multiple high-quality audio formats</li>
+            <li>Dynamic backgrounds based on album or playlist art</li>
+            <li>Metadata display: song name, artist, and cover image</li>
+            <li>Sleek, Spotify-inspired user interface</li>
+        </ul>
+
+        <h2>Disclaimer</h2>
+        <p>This tool is intended for <strong>educational and personal use only</strong>. Make sure to comply with
+            Spotify’s Terms of Service and your local copyright laws.</p>
+
+        <h2>Tech Stack</h2>
+        <ul>
+            <li>Python (Flask)</li>
+            <li>Spotify Web API</li>
+            <li>HTML, CSS, JavaScript</li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>Got questions or suggestions? Contact us via <a href="https://www.linkedin.com/in/aakash-selvaraj-8b91a027b/">Linkedin</a> or email:
+            <strong>aakashselvaraj2005@gmail.com</strong></p>
+        <div id="start"><button onclick="window.location.href='/index'">
+                Ready to Download Songs
+            </button></div>
+
+
+    </div>
+</body>
+
+</html>

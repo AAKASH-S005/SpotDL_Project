@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Spotify Songs Downloader</title>
+</head>
+
+<body>
+    <div class="background-blur"></div> 
+
+    <div class="container">
+        
+        <h1 id="title">Spotify Song Downloader</h1>
+        <form id="form">
+            <input type="text" id="song" name="song" placeholder="Paste song or playlist link">
+            <button id="search">Search</button>
+            <select id="format" name="format">
+                <option value="mp3">mp3</option>
+                <option value="flac">flac</option>
+                <option value="m4a">m4a</option>
+                <option value="opus">opus</option>
+            </select>
+        </form>
+        <div>
+            <p id="error"></p>
+        </div>
+
+<!-- paste it hear-->
+        <!-- 🔹 Container for Playlist Songs -->
+        <!--  <div id="playlist-container"></div>-->
+
+        <div class="song_content">
+            <div id="song-details">
+                <img src="" alt="cover_image" id="cover_image">
+                <p id="song_title"></p>
+                <p id="song_artist"></p>
+            </div>
+            <hr>
+
+
+
+            <script>
+
+                
+                let song_content = document.querySelector(".song_content");
+                song_content.style.display="none";
+                document.getElementById('form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const song = document.getElementById('song').value;
+
+                    const response = await fetch('/Song_details', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ song })
+                    });
+
+                    const data = await response.json();
+                    let song_content = document.querySelector(".song_content");
+                    song_content.innerHTML = ""; // Clear previous results
+
+                    if (data.error) {
+                        document.getElementById('error').innerText = data.error;
+                    } else if (data.playlist) { //playlist
+
+                        document.body.style.backgroundImage = `url('${data.playlist_cover_url}')`;
+document.body.style.backgroundSize = 'cover';
+document.body.style.backgroundPosition = 'center';
+document.body.style.backgroundRepeat = 'no-repeat'; // for full bg image
+document.body.style.backgroundAttachment = 'fixed'; 
+                        console.log(data.playlist);
+                        song_content.style.display = "flex";
+
+                        data.playlist.forEach((track, index) => {
+                            const card = document.createElement("div");
+                            card.classList.add("download_content");
+
+                            card.innerHTML = `
+
+                            
+                                <div class="left">
+                                    <div class="num">
+                                        <span id="number">${index + 1}</span>
+                                    </div>
+                                    <div class="text">
+                                        <img src="${track.cover_url}" alt="download_song_cover_image" id="download_song_cover_image">
+                                        <p id="list_song_name"><strong>${track.title}</strong> - ${track.artists.join(", ")}</p>
+                                        <p hidden class="track-id">${track.track_id}</p>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <button onclick="Download('${track.track_id}')">Download</button>
+                                </div>
+                            
+                        `;
+                            song_content.appendChild(card);
+                        });
+                    } else { //single song
+                        document.body.style.backgroundImage = `url('${data.cover_url}')`;
+document.body.style.backgroundSize = 'cover';
+document.body.style.backgroundPosition = 'center';
+document.body.style.backgroundRepeat = 'no-repeat'; // for full bg image
+
+                        song_content.style.display = "flex";
+                        
+
+                        song_content.innerHTML = `
+                            <div id="song-details">
+                                <img src="${data.cover_url}" alt="cover_image" id="cover_image">
+                                <p id="song_title">${data.title}</p>
+                                <p id="song_artist">${data.artists}</p>
+                            </div>
+                            <hr>
+                        <div class="download_content">
+
+                            <div class="left">
+                                <div class="num">
+                                <span id="number">01</span>
+                                </div>
+                                <div class="text">
+                                    <img src="${data.cover_url}" alt="download_song_cover_image" id="download_song_cover_image">
+                                    <p>${data.title} </p>
+                                    <p hidden class="track-id">${data.track_id}</p>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <button onclick="Download('${data.track_id}')">Download</button>
+                            </div>
+                        </div>
+                    `;
+                    }
+                });
+
+
+                
+
+
+                async function Download(trackId) {
+                  
+                    const format = document.getElementById('format').value;
+                    let song_title= await get_Title(trackId);
+                    const response = await fetch('/download_song', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url: `https://open.spotify.com/track/${trackId}`, format })
+                    });
+                    response.blob().then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        
+                        a.download = `${song_title}.${format}`;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                    });
+
+                    console.log(`Download started for track ID:${trackId}`)
+                }
+                
+                async function get_Title(trackId){
+                    const response=await fetch('/get_title',{
+                        method:'post',
+                        headers:{'Content-Type':'application/json'},
+                        body:JSON.stringify({trackid: trackId})
+                    });
+                    const data=await response.json();
+                    console.log(`song title : ${data}`);
+                    return data;
+                }
+
+            </script>
+        </div>
+</body>
+
+</html>
